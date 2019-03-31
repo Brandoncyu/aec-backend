@@ -1,0 +1,21 @@
+{
+  "name": "aec-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.2",
+    "nodemailer": "^6.0.0",
+    "nodemon": "^1.18.10",
+    "path": "^0.12.7"
+  }
+}
