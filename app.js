@@ -1,9 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const Moment = require ('moment');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const nodemailer = require('nodemailer');
-
+const cors = require('cors')
 const app = express();
 
 var userEmail;
@@ -12,6 +13,7 @@ var userEmail;
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
+app.use(cors())
 // Body Parser Middleware
 app.use(bodyParser.urlencoded({ ectended: false }));
 app.use(bodyParser.json());
@@ -28,10 +30,17 @@ app.get('/', (req, res) => {
 app.post('/send', (req, res) => {
     let sendEmail = req.body.email
     let sendBody = req.body.text
-    
+    console.log(sendBody)
+    let newBody = sendBody.map(element => {
+      let url = 'http://maps.google.com/maps?q=' + element.latitude + ',' + element.longitude
+      let string = `Your voice note at ${Moment(element.date).format('MMMM Do, h:mm:ss a')} <a href="${url}">this location</a>: ${element.blobURL}`
+      return string
+    })
+    console.log(newBody)
     // userEmail = "brandoncyu@gmail.com";
     // NotesAsString = req.body.message;
-    var NotesAsString = "TimeStamp = Tuesday@10:42pm \n Latitude: 123123424 \n Longitude: 23423424 \n Blob: Voice Recording"; // dummy data
+    var NotesAsString = newBody.join('</p><p>') // dummy data
+    console.log(NotesAsString)
 
     const output = `
         <h3>Stroll Notes</h3>
