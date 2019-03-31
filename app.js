@@ -30,17 +30,17 @@ app.get('/', (req, res) => {
 app.post('/send', (req, res) => {
     let sendEmail = req.body.email
     let sendBody = req.body.text
-    console.log(sendBody)
+
     let newBody = sendBody.map(element => {
       let url = 'http://maps.google.com/maps?q=' + element.latitude + ',' + element.longitude
       let string = `Your voice note at ${Moment(element.date).format('MMMM Do, h:mm:ss a')} <a href="${url}">this location</a>: ${element.blobURL}`
       return string
     })
-    console.log(newBody)
+
     // userEmail = "brandoncyu@gmail.com";
     // NotesAsString = req.body.message;
     var NotesAsString = newBody.join('</p><p>') // dummy data
-    console.log(NotesAsString)
+  
 
     const output = `
         <h3>Stroll Notes</h3>
