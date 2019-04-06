@@ -15,7 +15,7 @@ app.set('view engine', 'handlebars');
 
 app.use(cors())
 // Body Parser Middleware
-app.use(bodyParser.urlencoded({ ectended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Static Folder
@@ -28,9 +28,10 @@ app.get('/', (req, res) => {
 
 // app.post('/send', (req, res) => {
 app.post('/send', (req, res) => {
+
     let sendEmail = req.body.email
     let sendBody = req.body.text
-
+console.log(sendEmail, sendBody)
     let newBody = sendBody.map(element => {
       let url = 'http://maps.google.com/maps?q=' + element.latitude + ',' + element.longitude
       let string = `Your voice note at ${Moment(element.date).format('MMMM Do, h:mm:ss a')} <a href="${url}">this location</a>: ${element.blobURL}`
@@ -40,7 +41,7 @@ app.post('/send', (req, res) => {
     // userEmail = "brandoncyu@gmail.com";
     // NotesAsString = req.body.message;
     var NotesAsString = newBody.join('</p><p>') // dummy data
-  
+
 
     const output = `
         <h3>Stroll Notes</h3>
