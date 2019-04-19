@@ -8,7 +8,7 @@ const cors = require('cors')
 const app = express();
 
 var userEmail;
-
+// From this: https://www.youtube.com/watch?v=nF9g1825mwk
 // view engine setup
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
