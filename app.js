@@ -31,7 +31,6 @@ app.post('/send', (req, res) => {
 
     let sendEmail = req.body.email
     let sendBody = req.body.text
-console.log(sendEmail, sendBody)
     let newBody = sendBody.map(element => {
       let url = 'http://maps.google.com/maps?q=' + element.latitude + ',' + element.longitude
       let string = `Your voice note at ${Moment(element.date).format('MMMM Do, h:mm:ss a')} <a href="${url}">this location</a>: ${element.blobURL}`
